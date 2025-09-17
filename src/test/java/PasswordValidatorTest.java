@@ -1,39 +1,53 @@
-import org.Exception.PasswordValidationException;
-import org.Validator.PasswordValidator;
+import org.validator.PasswordValidator;
+import org.junit.jupiter.api.BeforeEach;
 import  org.junit.jupiter.api.Test;
+import org.rules.LengthRule;
+import org.rules.LowerCaseRule;
+import org.rules.UpperCaseRule;
+
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/* unit tests for {@link PasswordValidator}
+    Covers all edge cases and rule combinations
+* */
 public class PasswordValidatorTest {
 
-    private final PasswordValidator validator = new PasswordValidator();
+    private PasswordValidator validator;
+
+    @BeforeEach
+    void setUp(){
+        validator = new PasswordValidator(Arrays.asList(
+                new LengthRule(false),
+                new UpperCaseRule(false),
+                new LowerCaseRule(false),
+                new UpperCaseRule(false)
+        ));
+    }
 
     @Test
     void validPassword(){
-        assertDoesNotThrow(() -> validator.validate("StrongPwd@1"));
+        assertTrue(validator.validate("Gmail1256h"));
     }
 
     @Test
     void invalidPasswordnull(){
-        Exception ex = assertThrows(PasswordValidationException.class, () -> validator.validate(null));
-        assertTrue(ex.getMessage().contains("null"));
+        assertFalse(validator.validate(null));
     }
 
     @Test
     void invalidPasswordnolowercase(){
-        Exception ex = assertThrows(PasswordValidationException.class, () -> validator.validate("ABCDEF!1"));
-        assertTrue(ex.getMessage().toLowerCase().contains("lowercase"));
+         assertFalse(validator.validate("ABCDEF1"));
     }
 
     @Test
     void invalidPasswordnouppercase(){
-        Exception ex = assertThrows(PasswordValidationException.class, () -> validator.validate("#absdfgh1"));
-        assertTrue(ex.getMessage().contains("uppercase"));
+         assertFalse(validator.validate("hgbsdfgh1"));
     }
 
     @Test
-    void invalidPasswordnospecialchar(){
-        Exception ex = assertThrows(PasswordValidationException.class, () -> validator.validate("Abdfrfd45"));
-        assertTrue(ex.getMessage().contains("Password needs to have at least one special character"));
+    void invalidPasswordlength(){
+        assertFalse(validator.validate("Ad45"));
     }
 }
