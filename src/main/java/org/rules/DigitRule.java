@@ -1,6 +1,6 @@
 package org.rules;
 
-import org.exception.LowerCaseValidationError;
+import org.exception.LowerCaseValidationException;
 import org.exception.RuleValidationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +21,7 @@ public class DigitRule implements Rule{
             log.debug("Passed: {}", name());
             return true;
         }
-        throw new LowerCaseValidationError("Password should have at least one digit");
+        throw new LowerCaseValidationException("Password should have at least one digit");
     }
 
     @Override
