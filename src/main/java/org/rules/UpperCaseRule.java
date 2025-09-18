@@ -22,7 +22,7 @@ public class UpperCaseRule implements Rule{
             log.debug("Passed: {}", name());
             return true;
         }
-        throw new LowerCaseValidationException("Password should have at least one Uppercase letter");
+        throw new UpperCaseValidationException("Password should have at least one Uppercase letter");
     }
 
     @Override
