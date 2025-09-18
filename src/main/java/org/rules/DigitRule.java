@@ -26,7 +26,7 @@ public class DigitRule implements Rule{
 
     @Override
     public String name(){
-        return "LowerCaseRule";
+        return "DigitRule";
     }
 
     private void simulateDelay(){
