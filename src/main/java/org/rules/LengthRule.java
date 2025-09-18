@@ -1,6 +1,6 @@
 package org.rules;
 
-import org.exception.LengthValidationError;
+import org.exception.LengthValidationException;
 import org.exception.RuleValidationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +22,7 @@ public class LengthRule implements Rule {
             log.debug("Passed: {}", name());
             return true;
         }
-        throw new LengthValidationError("Password must be longer than 8 characters");
+        throw new LengthValidationException("Password must be longer than 8 characters");
     }
 
     @Override
