@@ -20,7 +20,7 @@ public class PasswordValidatorTest {
     void setUp(){
         validator = new PasswordValidator(Arrays.asList(
                 new LengthRule(false),
-                new UpperCaseRule(false),
+                new DigitCaseRule(false),
                 new LowerCaseRule(false),
                 new UpperCaseRule(false)
         ));
