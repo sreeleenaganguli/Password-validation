@@ -18,7 +18,7 @@ public class Main {
     public static void main(String[] args) {
         List<Rule> rules = Arrays.asList(
                 new LengthRule(true),
-                new UpperCaseRule(true),
+                new DigitRule(true),
                 new LowerCaseRule(true),
                 new UpperCaseRule(true)
         );
